@@ -1,24 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+
+import BaseLayout from "./Header/Header";
+import TicTacToe from "./Dashboard/tic_tac_toe";
+import Players from "./Players/Players";
 
 function App() {
+  const [players, setPlayers] = useState({
+    firstPlayer: {
+      name: 'Player 1',
+      score: 0,
+    },
+    secondPlayer: {
+      name: 'Player 2',
+      score: 0,
+    },
+  });
+  const [startGame, setStartGame] = useState(false);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    // Initially dislpays the Player Component, until the Player is willing to start the game
+    <BaseLayout>
+      {startGame ? <TicTacToe setPlayers={setPlayers} setStartGame={setStartGame} players={players} /> : <Players players={players} setPlayers={setPlayers} setStartGame={setStartGame} />}
+    </BaseLayout>
   );
 }
 
